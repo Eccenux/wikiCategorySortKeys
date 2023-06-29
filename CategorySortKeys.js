@@ -32,7 +32,7 @@ var CategorySortKeys = class {
 		});
 	
 		// append
-		document.querySelectorAll('.mw-category-group a').forEach((a)=>{
+		document.querySelectorAll('#mw-pages .mw-category-group a').forEach((a)=>{
 			let title = a.textContent.trim();
 			let sortkey = (title in keys) ? keys[title] : '';
 			if (!sortkey.length) {
@@ -52,7 +52,7 @@ var CategorySortKeys = class {
 
 	/** @private Find start/end letter. */
 	findBounds() {
-		let letters = Array.from(document.querySelectorAll('.mw-category-group h3')).map(el => el.textContent);
+		let letters = Array.from(document.querySelectorAll('#mw-pages .mw-category-group h3')).map(el => el.textContent);
 		if (!letters.length) {
 			return false;
 		}
