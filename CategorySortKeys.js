@@ -14,6 +14,30 @@
 var CategorySortKeys = class {
 	constructor() {}
 
+	/**
+	 * Enhance current category page.
+	 */
+	async enhance() {
+		// Object { ns: 0, title: "Gordon Allan", sortkeyprefix: "Allan, Gordon" }
+		const data = await this.loadPage();
+	
+		// mapit
+		const keys = {};
+		data.forEach(d => {
+			keys[d.title] = d.sortkeyprefix;
+		});
+	
+		// append
+		document.querySelectorAll('.mw-category-group a').forEach((a)=>{
+			let title = a.textContent.trim();
+			if (!(title in keys)) {
+				return;
+			}
+			let sortkey = keys[title];
+			a.insertAdjacentHTML('afterend', ` (${sortkey})`);
+		});
+	}
+
 	/** @private Load keys from start to end letters. */
 	async loadPage() {
 		let {start, end} = this.findBounds();
@@ -72,11 +96,7 @@ var CategorySortKeys = class {
 async function test() {
 	var cats = new CategorySortKeys();
 
-	var data = await cats.loadKeys();
-	console.log( data );
-
-	var data = await cats.loadPage();
-	console.log(data);
+	cats.enhance();
 
 	return cats;
 }
