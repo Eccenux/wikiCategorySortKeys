@@ -1,0 +1,14 @@
+{
+	"name": "wiki-category-sort-keys",
+	"version": "0.0.1",
+	"description": "Wikipedia: Show sort keys on category pages",
+	"author": "Maciej Nux Jaros",
+	"license": "MIT",
+	"type": "module",
+	"devDependencies": {
+		"eslint": "7.4.0"
+	},
+	"dependencies": {
+		"wikiploy": "^1.2.2"
+	}
+}
