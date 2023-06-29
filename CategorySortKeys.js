@@ -12,7 +12,11 @@
  * <nowiki>
  */
 var CategorySortKeys = class {
-	constructor() {}
+	constructor() {
+		this.conf = {
+			missing: '__NN__',	// TODO? move to CSS csk:empty{content:x}
+		};
+	}
 
 	/**
 	 * Enhance current category page.
@@ -30,11 +34,11 @@ var CategorySortKeys = class {
 		// append
 		document.querySelectorAll('.mw-category-group a').forEach((a)=>{
 			let title = a.textContent.trim();
-			if (!(title in keys)) {
-				return;
+			let sortkey = (title in keys) ? keys[title] : '';
+			if (!sortkey.length) {
+				sortkey = this.conf.missing;
 			}
-			let sortkey = keys[title];
-			a.insertAdjacentHTML('afterend', ` (${sortkey})`);
+			a.insertAdjacentHTML('afterend', ` <csk>(${sortkey})</csk>`);
 		});
 	}
 
