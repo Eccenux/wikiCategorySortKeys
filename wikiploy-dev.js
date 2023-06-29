@@ -6,8 +6,8 @@ import {DeployConfig, Wikiploy} from 'wikiploy';
 const ployBot = new Wikiploy();
 
 // custom summary
-ployBot.prepareSummary = () => {
-	return '#Wikiploy' + ' v1.0.0: beauty mark';
+ployBot.summary = () => {
+	return 'v1.0.1: beauty mark';
 }
 
 (async () => {
