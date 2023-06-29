@@ -16,14 +16,8 @@ var CategorySortKeys = class {
 
 	/** @private Load keys from start to end letters. */
 	async loadPage() {
-		let {
-			start,
-			end
-		} = this.findBounds();
-		console.log('loadPage: ', {
-			start,
-			end
-		});
+		let {start, end} = this.findBounds();
+		console.log('loadPage: ', {start, end});
 		let data = await this.loadKeys(start, end);
 		return data;
 	}
@@ -36,10 +30,7 @@ var CategorySortKeys = class {
 		}
 		let start = letters[0];
 		let end = letters.pop();
-		return {
-			start,
-			end
-		};
+		return {start, end};
 	}
 
 	/** @private Load keys from start to end letters. */
@@ -69,7 +60,7 @@ var CategorySortKeys = class {
 				} else {
 					reject({
 						e: 'invalid data',
-						data
+						data,
 					});
 				}
 			});
