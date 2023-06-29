@@ -9,6 +9,9 @@
  * Authors:
  * Maciej Nux Jaros
  * 
+ * Deployed with love using Wikiploy:
+ * [[Wikipedia:Wikiploy]]
+ * 
  * <nowiki>
  */
 var CategorySortKeys = class {
