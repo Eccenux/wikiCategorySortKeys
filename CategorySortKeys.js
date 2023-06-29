@@ -96,19 +96,22 @@ var CategorySortKeys = class {
 	}
 }
 
-// temp
-async function test() {
-	var cats = new CategorySortKeys();
+// init
+if ( mw.config.get('wgCanonicalNamespace') === 'Category' ) {
+	mw.loader.using(['mediawiki.util'], function () {
+		// link-button
+		const title = 'Sort keys';
+		const desc = 'Show sort keys for pages in this category';
+		const link = mw.util.addPortletLink( 'p-tb', '', title, 'pt-sortkeys', desc, null, '#t-info' );
 
-	cats.enhance();
+		// action
+		$( link ).click( function ( e ) {
+			e.preventDefault();
 
-	return cats;
-}
-
-if (mw.config.get('wgCanonicalNamespace') === 'Category') {
-	$(function(){
-		test();
-	});
+			var cats = new CategorySortKeys();
+			cats.enhance();
+		} );
+	} );
 }
 
 //</nowiki>
