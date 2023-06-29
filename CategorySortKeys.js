@@ -1,10 +1,13 @@
 /**
- * Autocorrection features in Visual Editor.
+ * CategorySortKeys.
  * 
- * Version history and technical docs:
- *		https://github.com/Eccenux/veAutocorrect
+ * Show sort keys on category pages on Wikipedia (or other MediaWiki).
  * 
- * Authors: Maciej Nux Jaros.
+ * Repository:
+ * https://github.com/Eccenux/wikiCategorySortKeys
+ * 
+ * Authors:
+ * Maciej Nux Jaros
  * 
  * <nowiki>
  */
