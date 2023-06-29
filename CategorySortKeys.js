@@ -51,7 +51,7 @@ var CategorySortKeys = class {
 			};
 			if (start && end) {
 				props['cmstartsortkeyprefix'] = `${start}`;
-				props['cmstartsortkeyprefix'] = `${end}ZZZ`;
+				props['cmendsortkeyprefix'] = `${end}ZZZ`;
 			}
 			api.get(props).done(function (data) {
 				let members = data?.query?.categorymembers;
