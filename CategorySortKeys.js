@@ -20,7 +20,7 @@ let pl = mw.config.get('wgUserLanguage') === 'pl';
 let lang = {
 	missing: pl ? '__NN__' : '__NA__',
 	buttonTitle: pl ? '🔤 Klucze sort.' : '🔤 Sort keys',
-	buttonDesc: pl ? 'Pokaż klucze sortowanie dla stron w bieżącej kategorii' : 'Show sort keys for pages in this category',
+	buttonDesc: pl ? 'Pokaż klucze sortowania dla stron w bieżącej kategorii' : 'Show sort keys for pages in this category',
 };
 // usage:
 //mw.hook('userjs.CategorySortKeys.lang.ready').add( (lang) => { lang = ... } );

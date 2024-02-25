@@ -21,7 +21,7 @@ const ployBot = new Wikiploy(botpass);
 	}));
 	configs.push(new DeployConfig({
 		src: 'CategorySortKeys.js',
-		site: 'pl.wikimedia.org',
+		site: 'pl.wikipedia.org',
 	}));
 	configs.push(new DeployConfig({
 		src: 'CategorySortKeys.js',
