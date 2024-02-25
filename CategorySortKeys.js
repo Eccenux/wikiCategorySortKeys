@@ -14,10 +14,24 @@
  * 
  * <nowiki>
  */
-var CategorySortKeys = class {
+
+/* Translatable strings */
+let pl = mw.config.get('wgUserLanguage') === 'pl';
+let lang = {
+	missing: pl ? '__NN__' : '__NA__',
+	buttonTitle: pl ? '🔤 Klucze sort.' : '🔤 Sort keys',
+	buttonDesc: pl ? 'Pokaż klucze sortowanie dla stron w bieżącej kategorii' : 'Show sort keys for pages in this category',
+};
+// usage:
+//mw.hook('userjs.CategorySortKeys.lang.ready').add( (lang) => { lang = ... } );
+mw.hook('userjs.CategorySortKeys.lang.ready').fire(lang);
+
+// above in a separate file with en being default and pl when ``
+
+class CategorySortKeys {
 	constructor() {
 		this.conf = {
-			missing: '__NN__',	// TODO? move to CSS csk:empty{content:x}
+			missing: lang.missing,
 		};
 	}
 
@@ -103,8 +117,8 @@ var CategorySortKeys = class {
 if ( mw.config.get('wgCanonicalNamespace') === 'Category' ) {
 	mw.loader.using(['mediawiki.util'], function () {
 		// link-button
-		const title = 'Sort keys';
-		const desc = 'Show sort keys for pages in this category';
+		const title = lang.buttonTitle;
+		const desc = lang.buttonDesc;
 		const link = mw.util.addPortletLink( 'p-tb', '', title, 'pt-sortkeys', desc, null, '#t-info' );
 
 		// action
