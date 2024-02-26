@@ -14,6 +14,9 @@
  * 
  * <nowiki>
  */
+(function () {
+	
+const logTag = '[csk]';
 
 /* Translatable strings */
 let pl = mw.config.get('wgUserLanguage') === 'pl';
@@ -30,15 +33,16 @@ mw.hook('userjs.CategorySortKeys.lang.ready').fire(lang);
 
 class CategorySortKeys {
 	constructor() {
-		this.conf = {
-			missing: lang.missing,
-		};
+		this.conf = {};
 	}
 
 	/**
 	 * Enhance current category page.
 	 */
 	async enhance() {
+		// css
+		this.addStyle();
+
 		// Object { ns: 0, title: "Gordon Allan", sortkeyprefix: "Allan, Gordon" }
 		const data = await this.loadPage();
 	
@@ -47,22 +51,42 @@ class CategorySortKeys {
 		data.forEach(d => {
 			keys[d.title] = d.sortkeyprefix;
 		});
+
+		// remove old
+		document.querySelectorAll('#mw-pages .mw-category-group csk').forEach((el)=>el.remove());
 	
 		// append
 		document.querySelectorAll('#mw-pages .mw-category-group a').forEach((a)=>{
 			let title = a.textContent.trim();
 			let sortkey = (title in keys) ? keys[title] : '';
+			let attrs = '';
 			if (!sortkey.length) {
-				sortkey = this.conf.missing;
+				sortkey = lang.missing;
+				attrs = ' m';
 			}
-			a.insertAdjacentHTML('afterend', ` <csk>(${sortkey})</csk>`);
+			a.insertAdjacentHTML('afterend', ` <csk${attrs}>(${sortkey})</csk>`);
 		});
+	}
+
+	/** @private Add CSS. */
+	addStyle() {
+		const styleId = 'nug-csk-css';
+		if (document.getElementById(styleId)) {
+			// console.warn(logTag, 'addStyle repeat');
+			return;
+		}
+		const css = /*css*/`
+			csk[m] {
+				color: mediumvioletred;
+			}
+		`;
+		document.body.insertAdjacentHTML('beforeend', `<style id='${styleId}'>${css}</style>`);
 	}
 
 	/** @private Load keys from start to end letters. */
 	async loadPage() {
 		let {start, end} = this.findBounds();
-		console.log('loadPage: ', {start, end});
+		console.log(logTag, 'loadPage: ', {start, end});
 		let data = await this.loadKeys(start, end);
 		return data;
 	}
@@ -131,4 +155,5 @@ if ( mw.config.get('wgCanonicalNamespace') === 'Category' ) {
 	} );
 }
 
+})();
 //</nowiki>
