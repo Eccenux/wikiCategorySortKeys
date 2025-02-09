@@ -47,7 +47,7 @@ class CategorySortKeys {
 		const data = await this.loadPage();
 	
 		// mapit
-		const keys = {};
+		let keys = {};
 		data.forEach(d => {
 			keys[d.title] = d.sortkeyprefix;
 		});
@@ -56,7 +56,7 @@ class CategorySortKeys {
 		document.querySelectorAll('#mw-pages .mw-category-group csk').forEach((el)=>el.remove());
 	
 		// append
-		document.querySelectorAll('#mw-pages .mw-category-group a').forEach((a)=>{
+		let addSortKey = (a)=>{
 			let title = a.textContent.trim();
 			let sortkey = (title in keys) ? keys[title] : '';
 			let attrs = '';
@@ -65,7 +65,20 @@ class CategorySortKeys {
 				attrs = ' m';
 			}
 			a.insertAdjacentHTML('afterend', ` <csk${attrs}>(${sortkey})</csk>`);
+		};
+		document.querySelectorAll('#mw-pages .mw-category-group a[href]').forEach(addSortKey);
+		// NS:Category
+		keys = {};
+		data.filter(d=>d.ns == 14).forEach(d => {
+			keys[d.title.replace(/.+?:/, '')] = d.sortkeyprefix;
 		});
+		document.querySelectorAll('#mw-subcategories .mw-category-group a[href]').forEach(addSortKey);
+		// NS:File
+		keys = {};
+		data.filter(d=>d.ns == 6).forEach(d => {
+			keys[d.title.replace(/.+?:/, '')] = d.sortkeyprefix;
+		});
+		document.querySelectorAll('#mw-category-media a.galleryfilename').forEach(addSortKey);
 	}
 
 	/** @private Add CSS. */
