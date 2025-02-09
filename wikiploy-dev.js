@@ -1,5 +1,5 @@
 /**
- * Full deploy.
+ * Dev/staging deploy.
  */
 import {DeployConfig, Wikiploy, verlib} from 'wikiploy';
 
@@ -17,14 +17,7 @@ const ployBot = new Wikiploy(botpass);
 	const configs = [];
 	configs.push(new DeployConfig({
 		src: 'CategorySortKeys.js',
-		site: 'en.wikipedia.org',
-	}));
-	configs.push(new DeployConfig({
-		src: 'CategorySortKeys.js',
-		site: 'pl.wikipedia.org',
-	}));
-	configs.push(new DeployConfig({
-		src: 'CategorySortKeys.js',
+		dst: '~/CategorySortKeys-dev.js',
 		site: 'meta.wikimedia.org',
 	}));
 
